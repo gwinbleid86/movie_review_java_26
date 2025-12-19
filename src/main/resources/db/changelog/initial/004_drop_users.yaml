@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: drop_table_users
+      author: Aleksei Podstavin
+      changes:
+        - dropTable:
+            tableName: users

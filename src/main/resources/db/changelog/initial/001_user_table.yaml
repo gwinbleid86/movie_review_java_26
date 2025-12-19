@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-user-table
+      author: Aleksei Podstavin
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: password
+                  type: varchar(255)

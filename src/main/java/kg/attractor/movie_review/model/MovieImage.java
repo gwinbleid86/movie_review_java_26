@@ -5,8 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class User {
-    private String email;
-    private String username;
-    private String password;
+public class MovieImage {
+    private Long id;
+    private Long movieId;
+    private String fileName;
 }

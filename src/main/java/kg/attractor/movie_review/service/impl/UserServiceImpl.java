@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +22,8 @@ public class UserServiceImpl implements UserService {
         List<UserDto> userDtos = new ArrayList<>();
         users.forEach(user -> {
             UserDto userDto = new UserDto();
-            userDto.setId(user.getId());
-            userDto.setName(user.getName());
+            userDto.setEmail(user.getEmail());
+            userDto.setName(user.getUsername());
             userDto.setPassword(user.getPassword());
             userDtos.add(userDto);
         });
@@ -36,8 +35,8 @@ public class UserServiceImpl implements UserService {
         User user = userDao.getUserById(id)
                 .orElseThrow(UserNotFoundException::new);
         UserDto userDto = new UserDto();
-        userDto.setId(user.getId());
-        userDto.setName(user.getName());
+        userDto.setEmail(user.getEmail());
+        userDto.setName(user.getUsername());
         userDto.setPassword(user.getPassword());
         return userDto;
     }
@@ -53,8 +52,8 @@ public class UserServiceImpl implements UserService {
         List<UserDto> userDtos = new ArrayList<>();
         users.forEach(user -> {
             UserDto userDto = new UserDto();
-            userDto.setId(user.getId());
-            userDto.setName(user.getName());
+            userDto.setEmail(user.getEmail());
+            userDto.setName(user.getUsername());
             userDto.setPassword(user.getPassword());
             userDtos.add(userDto);
         });
