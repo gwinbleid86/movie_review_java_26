@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: drop_table_users
+      id: 004 drop_table_users
       author: Aleksei Podstavin
       changes:
         - dropTable:

@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009 modify user table
+      author: Aleksei Podstavin
+      changes:
+        - addColumn:
+            tableName: user_table
+            columns:
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: long
+                  constraints:
+                    foreignKeyName: fk_role_id
+                    nullable: false
+                    references: roles(id)

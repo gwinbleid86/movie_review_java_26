@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create_table_review_and_user
+      id: 005 create_table_review_and_user
       author: Aleksei Podstavin
       changes:
         - createTable:

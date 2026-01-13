@@ -1,21 +1,18 @@
 databaseChangeLog:
   - changeSet:
-      id: 001-create-user-table
+      id: 007 create authorities
       author: Aleksei Podstavin
       changes:
         - createTable:
-            tableName: users
+            tableName: authorities
             columns:
               - column:
                   name: id
-                  type: int
+                  type: long
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: email
-                  type: varchar(255)
-              - column:
-                  name: password
-                  type: varchar(255)
+                  name: authority
+                  type: varchar(50)
