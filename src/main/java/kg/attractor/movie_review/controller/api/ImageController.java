@@ -1,4 +1,4 @@
-package kg.attractor.movie_review.controller;
+package kg.attractor.movie_review.controller.api;
 
 import kg.attractor.movie_review.dto.MovieImageDto;
 import kg.attractor.movie_review.service.ImageService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("images")
+@RequestMapping("api/images")
 @RequiredArgsConstructor
 public class ImageController {
     private final ImageService imageService;

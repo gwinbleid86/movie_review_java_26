@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 006 added table fo movie image
+      id: 008 create roles
       author: Aleksei Podstavin
       changes:
         - createTable:
-            tableName: movie_images
+            tableName: roles
             columns:
               - column:
                   name: id
@@ -14,14 +14,12 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: movie_id
+                  name: role
+                  type: varchar(50)
+              - column:
+                  name: authority_id
                   type: long
                   constraints:
-                    foreignKeyName: mfk_movie_id
+                    foreignKeyName: fk_authority_id
                     nullable: false
-                    references: movie(id)
-              - column:
-                  name: file_name
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
+                    references: authorities(id)

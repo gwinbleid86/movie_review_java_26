@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class MovieDto {
-//    private int id;
+    private int id;
     private String name;
     private Director director;
     private int year;

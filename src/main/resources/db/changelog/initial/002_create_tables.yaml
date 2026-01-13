@@ -1,6 +1,6 @@
 ﻿databaseChangeLog:
   - changeSet:
-      id: create-director-table
+      id: 002 create-director-table
       author: Aleksei Podstavin
       changes:
         - createTable:
