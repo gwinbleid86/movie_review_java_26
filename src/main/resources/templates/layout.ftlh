@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring>
 <#macro layout>
 
     <!doctype html>
@@ -67,9 +68,9 @@
                         </form>
                     </#if>
                 <#else>
-                    <a href="auth/login"
+                    <a href="/auth/login"
                        class="btn alert-success m-2">Login</a>
-                    <a href="auth/register"
+                    <a href="/auth/register"
                        class="btn alert-info m-2">Register</a>
                 </#if>
 
@@ -80,7 +81,7 @@
     </nav>
 
     <div class="container py-5">
-        <#nested >
+        <#nested spring>
     </div>
 
     <footer class="footer mt-auto py-3 bg-light">

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface MovieService {
     List<MovieDto> getMovies();
+
+    MovieDto findById(Long id);
 }
