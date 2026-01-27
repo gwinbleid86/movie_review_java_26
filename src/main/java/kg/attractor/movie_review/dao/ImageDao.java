@@ -29,7 +29,7 @@ public class ImageDao {
     }
 
     public void save(MovieImage image) {
-        String sql = "insert into movie_images (movie_id, file_name) values (?, ?)";
-        jdbcTemplate.update(sql, image.getMovieId(), image.getFileName());
+//        String sql = "insert into movie_images (movie_id, file_name) values (?, ?)";
+//        jdbcTemplate.update(sql, image.getMovieId(), image.getFileName());
     }
 }

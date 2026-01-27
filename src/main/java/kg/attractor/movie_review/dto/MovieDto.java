@@ -1,7 +1,6 @@
 package kg.attractor.movie_review.dto;
 
-import kg.attractor.movie_review.model.Cast;
-import kg.attractor.movie_review.model.Director;
+import kg.attractor.movie_review.model.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +15,17 @@ import java.util.List;
 public class MovieDto {
     private int id;
     private String name;
-    private Director director;
+    private DirectorDto director;
     private int year;
-    private List<Cast> castList;
+    private List<CastDto> castList;
     private String description;
+
+    public static MovieDto convertToDto(Movie movie) {
+        MovieDto movieDto = new MovieDto();
+        movieDto.setId(movie.getId());
+        movieDto.setName(movie.getName());
+        movieDto.setYear(movie.getReleaseYear());
+        movieDto.setDescription(movie.getDescription());
+        return movieDto;
+    }
 }

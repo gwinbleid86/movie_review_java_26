@@ -1,7 +1,7 @@
 <#import "../layout.ftlh" as main>
 <@main.layout>
     <div class="row">
-        <#list movies as movie>
+        <#list movies.getContent() as movie>
             <div class="card col-3 m-3" style="width: 18rem;">
                 <img src="api/images/${movie.id}" class="card-img-top" alt="...">
                 <div class="card-body">

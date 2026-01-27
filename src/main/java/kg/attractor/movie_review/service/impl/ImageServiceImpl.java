@@ -28,7 +28,7 @@ public class ImageServiceImpl implements ImageService {
         String filename = fileService.saveUploadFile(movieImageDto.getImage(), "images");
         MovieImage image = new MovieImage();
         image.setFileName(filename);
-        image.setMovieId(movieImageDto.getMovieId());
+//        image.setMovieId(movieImageDto.getMovieId());
         imageDao.save(image);
     }
 }
