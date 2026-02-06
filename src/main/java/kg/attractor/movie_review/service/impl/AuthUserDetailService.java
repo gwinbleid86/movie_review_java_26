@@ -1,16 +1,22 @@
 package kg.attractor.movie_review.service.impl;
 
+import kg.attractor.movie_review.exceptions.RoleNotFoundException;
 import kg.attractor.movie_review.exceptions.UserNotFoundException;
 import kg.attractor.movie_review.model.Authority;
 import kg.attractor.movie_review.model.Role;
 import kg.attractor.movie_review.model.User;
+import kg.attractor.movie_review.repository.RoleRepository;
 import kg.attractor.movie_review.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,6 +27,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder encoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -64,4 +72,22 @@ public class AuthUserDetailService implements UserDetailsService {
         return privileges;
     }
 
+    public void processOAuthPostLogin(String email) {
+        var existUser = userRepository.findByEmail(email);
+
+        if (existUser.isEmpty()) {
+            var user = new User();
+            user.setEmail(email);
+            user.setPassword(encoder.encode("qwerty"));
+            user.setRoles(new ArrayList<>());
+            user.setEnabled(Boolean.TRUE);
+
+            user.addRole(roleRepository.findByRoleName("GUEST").orElseThrow(RoleNotFoundException::new));
+            userRepository.saveAndFlush(user);
+        }
+
+        UserDetails userDetails = loadUserByUsername(email);
+        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
+    }
 }

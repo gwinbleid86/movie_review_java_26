@@ -1,6 +1,9 @@
 package kg.attractor.movie_review.config;
 
 import kg.attractor.movie_review.config.filters.JwtAuthFilter;
+import kg.attractor.movie_review.model.CustomOAuth2User;
+import kg.attractor.movie_review.service.impl.AuthUserDetailService;
+import kg.attractor.movie_review.service.impl.CustomOAuth2UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +22,8 @@ import org.springframework.security.web.servlet.util.matcher.PathPatternRequestM
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
+    private final CustomOAuth2UserServiceImpl oAuth2UserService;
+    private final AuthUserDetailService userService;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -44,6 +49,16 @@ public class SecurityConfig {
                         .requestMatchers("/reviews/**").fullyAuthenticated()
                         .requestMatchers("/users/**").hasAuthority("ADMIN")
                         .anyRequest().permitAll()
+                )
+                .oauth2Login(oauth -> oauth
+                        .loginPage("/auth/login")
+                        .userInfoEndpoint(userConfig -> userConfig
+                                .userService(oAuth2UserService))
+                        .successHandler(((request, response, authentication) -> {
+                            var oauthUser = (CustomOAuth2User) authentication.getPrincipal();
+                            userService.processOAuthPostLogin(oauthUser.getAttribute("email"));
+                            response.sendRedirect("/");
+                        }))
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
