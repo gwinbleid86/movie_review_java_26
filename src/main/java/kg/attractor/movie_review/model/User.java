@@ -31,6 +31,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Boolean enabled;
 
+    private String resetPasswordToken;
+
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users", cascade = CascadeType.ALL)
     private List<Role> roles;
 

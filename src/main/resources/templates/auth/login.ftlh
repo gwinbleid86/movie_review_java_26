@@ -51,6 +51,8 @@
                                 Sign in
                             </button>
 
+                            <a href="forgot_password">Forgot Password?</a>
+
                         </form>
 
                     </div>
