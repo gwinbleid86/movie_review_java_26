@@ -27,16 +27,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="/">Hidden brand</a>
+                <a class="navbar-brand" href="/">Movie Review</a>
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="#"><@spring.message "layout.nav.home"/></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/movies">Movies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        <a class="nav-link" href="/movies"><@spring.message "layout.nav.movies"/></a>
                     </li>
                 </ul>
                 <form class="d-flex">
@@ -49,7 +46,8 @@
                     </#if>
 
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <button class="btn btn-outline-success"
+                            type="submit"><@spring.message "layout.nav.search"/></button>
                 </form>
 
 
@@ -61,7 +59,7 @@
                     >
                     <#if user??>
                         <a href="/profile/${name}" class="text-light m-2 m-sm-0">
-                            Hello ${name}:
+                            <@spring.message "layout.nav.hello"/> ${name}:
 
                             <#list user.authorities as auth>
                                 <span class="text-danger">${auth}</span>
@@ -80,19 +78,29 @@
                             </#if>
                             <button type="submit" class="btn alert-danger m-2"
                                     id="logout">
-                                Logout
+                                <@spring.message "layout.nav.logout"/>
                             </button>
                         </form>
                     </#if>
                 <#else>
                     <a href="/auth/login"
-                       class="btn alert-success m-2">Login</a>
+                       class="btn alert-success m-2"><@spring.message "layout.nav.login"/></a>
                     <a href="/auth/register"
-                       class="btn alert-info m-2">Register</a>
+                       class="btn alert-info m-2"><@spring.message "layout.nav.register"/></a>
                 </#if>
 
                 <#--                <a href="auth/login" type="button" class="btn alert-success">Login</a>-->
                 <#--                <a href="auth/logout" type="button" class="btn alert-danger">Logout</a>-->
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <@spring.message "layout.nav.lang.change"/>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                        <li><a class="dropdown-item" href="?lang=en"><@spring.message "layout.nav.lang_en"/></a></li>
+                        <li><a class="dropdown-item" href="?lang=ru"><@spring.message "layout.nav.lang_ru"/></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -103,10 +111,10 @@
 
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container">
-            <span class="text-muted">Movie Review</span>
+            <span class="text-muted"><@spring.message "layout.footer.label"/></span>
         </div>
     </footer>
 
     </body>
-    </html>
+</html>
 </#macro>

@@ -34,3 +34,5 @@ build/
 /db/
 /data/
 /log/
+/docker/.env
+/.env

@@ -1,0 +1,35 @@
+services:
+
+  #  nginx:
+
+  #  db:
+  #    image: postgres
+  #    restart: always
+  #      # set shared memory limit when using docker compose
+  #      # shm_size: 128mb
+  #      # or set shared memory limit when deploy via swarm stack
+  #    #volumes:
+  #      #  - type: tmpfs
+  #      #    target: /dev/shm
+  #      #    tmpfs:
+  #      #      size: 134217728 # 128*2^20 bytes = 128Mb
+  #    environment:
+  #      POSTGRES_PASSWORD: qwerty
+
+  app:
+    image: movie_review_26_image:lesson_79
+    container_name: movie_review_container
+    #    restart: unless-stopped
+    ports:
+      - "8089:8089"
+    volumes:
+      - ./db:/app/db
+      - ./log:/app/log
+      - ./data:/app/data
+      - ./.env:/app/.env
+#      - type: bind
+#        source: ./.env
+#        target: /app/.env
+#        read_only: true
+#    depends_on:
+#      - db
